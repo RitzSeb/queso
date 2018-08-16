@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    </head>
+
+    <body>
+        <script>
+            
+            function roho(str){
+                res = prompt(str+" wants to know your name:")
+
+                $.ajax({
+                    method: "POST",
+                    url: "/sms",
+                    dataType: 'json',    
+                    data: { name: res}
+                })
+                .done(function( response ) {
+                    console.log("Response: " + JSON.stringify(response));
+                    alert(JSON.stringify(response.answer));
+                })
+                .fail(function(err) {
+                    console.log( "You messed up: " + err );
+                }); 
+            }  
+        </script>
+
+        <button onclick="roho('Queso')">
+            Special Button
+        </button>
+    </body>
+</html>
